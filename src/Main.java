@@ -8,7 +8,54 @@ public class Main {
         ArrayList<ArrayList<String>> details = readTableDetails("test_movies");
         ArrayList<ArrayList<String>> rows = readTableRows("test_movies");
 
+    //    System.out.println(createInsert("test_movies", details, rows.get(15)));
+
+        //insertIntoTable("INSERT INTO test_movies (name, release_date) VALUES ('hi', '2023-02-13')");
+
+
         System.out.println("Debug point.");
+
+    }
+
+/*
+    public static String createInsert(String table, ArrayList<ArrayList<String>> details, ArrayList<String> row) {
+
+        StringBuilder headers = new StringBuilder("( ");
+        StringBuilder values = new StringBuilder("( ");
+
+        for(int i = 0 ; i < details.size() ; i++) {
+            try {
+                row.get(i);
+            } catch (NullPointerException e)
+            if(!row.get(i).isEmpty()) {
+                headers.append(details.get(i).get(0));
+                headers.append(", ");
+                values.append(row.get(i));
+                values.append(", ");
+            }
+        }
+
+        headers.setLength(headers.length()-2);
+        values.setLength(values.length()-2);
+        return "INSERT INTO " + table + headers + ") VALUES " + values + ");";
+
+    }
+
+*/
+
+    public static boolean insertIntoTable(String statement) {
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://192.168.1.128:3306/media","desktop","&a90f#b33Sf0");
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(statement);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return false;
 
     }
 
